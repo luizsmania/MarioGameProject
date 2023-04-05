@@ -8,7 +8,7 @@ const jump = () => {
     mario.classList.add('jump');
     setTimeout(() => {
         mario.classList.remove('jump');
-    }, 500);
+    }, 550);
 };
 
 
@@ -57,17 +57,24 @@ let loop = setInterval(() => {
 }, 100);
 
 const pipeAnimationInterval = setInterval(() => {
-    const pipe = document.querySelector('.pipe')
-    const pipeAnimation = window.getComputedStyle(pipe).animationDuration;
-    const newPipeAnimation = parseFloat(pipeAnimation) - 0.05;
-    pipe.style.animationDuration = `${newPipeAnimation}s`;
-    const currentRight = parseFloat(window.getComputedStyle(pipe).right);
-    pipe.style.right = `${currentRight}px`;
+    const pipeAnimationTime = parseFloat(getComputedStyle(pipe).animationDuration.replace('s', ''));
     const speedSpan = document.querySelector('.speed');
-    const currentSpeed = parseInt(speedSpan.textContent);
-    const newSpeed = currentSpeed + 1;
-    speedSpan.textContent = newSpeed.toString();
-}, 5000);
+    const pipeRight = getComputedStyle(pipe).right;
+  
+    console.log('Pipe computed style:', getComputedStyle(pipe));
+  
+    if (pipeAnimationTime > 0.9 && pipeRight === '100%') {
+      pipe.style.animationDuration = `${pipeAnimationTime - 0.1}s`;
+      speedSpan.textContent = parseInt(speedSpan.textContent) + 1;
+      pipe.style.animation = 'none';
+      setTimeout(() => {
+        pipe.style.animation = `pipe-animation ${pipeAnimationTime - 0.1}s infinite linear`;
+      }, 500);
+    }
+  }, 10000);
+  
+  
+  
 
 let scoreLoop = setInterval(() => {
     const scoreSpan = document.querySelector('.score');
