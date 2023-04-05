@@ -10,12 +10,24 @@
 </head>
 <body>
     <div onclick="jump" class="game-board">
-
-        <img src="assets/images/mario.webp" class="mario" alt="">
-        <img class="pipe" src="./assets/images/pipe.png" alt="">
+        
+        
+        <img src="assets/images/clouds.png" class="clouds">
+        <img src="assets/images/gameoverimg.png" class="gameover" alt="">
+        <img class="pipe" src="./assets/images/pipe.png">
+        <img src="assets/images/mario.webp" class="mario">
+        
+        
 
         <script src="/assets/js/script.js"></script>
 
     </div>
+    <p>SCORE: <span class="score">0</span></p>
+    <p>COINS: <span class="coins">0</span></p>
+    <p>SPEED: <span class="speed">1</span></p>
+    <p class="buySkin" >30 COINS - SKIN PIKACHU - <span onclick="skinPika()">BUY</span></p>
+
+
+    <img src="/assets/images/tryagain.png" class="tryagain" onclick="restart()" alt="">
 </body>
 </html>
