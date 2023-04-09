@@ -13,6 +13,11 @@
     <nav>
         <h1 class="logo">TOTALJUMPER</h1>
     </nav>
+        <!-- <img src="assets/images/startbanner.png" alt=""> -->
+    <button class="startButton "onclick="startGame()">START GAME</button>
+
+
+    <div class="gameitself"> 
     <div onclick="jump" class="game-board">
         
         <p>SCORE: <span class="score">0</span> <i class="fa-solid fa-star fa-fade" style="color: #0c1d3b;"></i></p>
@@ -29,7 +34,7 @@
         <script src="/assets/js/script.js"></script>
 
     </div>
-    
+    <p class="notEnough">INSUFICIENT COINS, YOU NEED MORE <span class='coinsNeeded'>0</span> COINS</p>
     <br>
     <p class="buySkin" >50 <i class="fa-solid fa-coins"></i> - SKIN PIKACHU - <span onclick="skinPika()">BUY</span></p>
     <br>
@@ -37,9 +42,10 @@
     <br>
     <p class="buySkin" >150 <i class="fa-solid fa-coins"></i> - SKIN HOMER - <span onclick="skinHomer()">BUY</span></p>
     <br>
-    <p class="notEnough">INSUFICIENT COINS, YOU NEED MORE <span class='coinsNeeded'>0</span> COINS</p>
+    <p>BEST SCORE: <span class="bestScore">0</span></p>
 
 
-    <img src="/assets/images/tryagain.png" class="tryagain" onclick="restart()" alt="">
+    <img src="/assets/images/tryagain.png" class="tryagain" onclick="startGame()" alt="">
+</div>
 </body>
 </html>
