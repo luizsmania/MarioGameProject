@@ -2,6 +2,8 @@ const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
 const gameBoard = document.querySelector('.game-board');
 const clouds = document.querySelector('.clouds');
+const restartButton = document.querySelector('.gameover')
+let isGameOver = false
 let skin = 'mario'
 
 const jump = () => {
@@ -23,7 +25,11 @@ let loop = setInterval(() => {
     const gameOver = document.querySelector('.gameover');
     const tryAgain = document.querySelector('.tryagain');
 
-    if (pipePosition <= 210 && pipePosition > 10 && marioPosition < 100) {
+    if (pipePosition <= 210 && pipePosition > 20 && marioPosition < 100) {
+        isGameOver = true
+        if (isGameOver){
+            document.addEventListener('keydown', restart);
+        }
         pipe.style.animation = 'none';
         pipe.style.left = `${pipePosition}px`;
 
@@ -63,21 +69,24 @@ let loop = setInterval(() => {
 const pipeAnimationInterval = setInterval(() => {
     const pipeAnimationTime = parseFloat(getComputedStyle(pipe).animationDuration.replace('s', ''));
     const speedSpan = document.querySelector('.speed');
+    const speedCounter = document.querySelector('.speedCount')
     const pipeRight = getComputedStyle(pipe).right;
   
     console.log('Pipe computed style:', getComputedStyle(pipe));
   
-    if (pipeAnimationTime > 0.1) {
+    if (pipeAnimationTime > 0.8) {
       pipe.style.animationDuration = `${pipeAnimationTime - 0.1}s`;
       speedSpan.textContent = parseInt(speedSpan.textContent) + 1;
       pipe.style.visibility = 'hidden';
+      speedCounter.style.visibility = 'visible';
       pipe.style.animation = 'none';
       setTimeout(() => {
         pipe.style.visibility = 'visible'
+        speedCounter.style.visibility = 'hidden';
         pipe.style.animation = `pipe-animation ${pipeAnimationTime - 0.1}s infinite linear`;
-      }, 500);
+      }, 700);
     }
-  }, 10000);
+  }, 12000);
 
   
   
@@ -104,8 +113,8 @@ function restart() {
 function skinPika() {
     const coinsSpan = document.querySelector('.coins');
     const currentCoins = parseInt(coinsSpan.textContent);
-    const newCoins = currentCoins - 1;
-    if (currentCoins >= 1) {
+    const newCoins = currentCoins - 50;
+    if (currentCoins >= 50) {
         mario.src = 'assets/images/pikachu.webp';
         mario.style.width = '180px'
         mario.style.bottom = '0px'
@@ -115,15 +124,23 @@ function skinPika() {
         pipe.style.width = '230px';
         pipe.style.marginBottom = '-35px'
         
+    } else {
+        const notEnough = document.querySelector('.notEnough')
+        notEnough.style.visibility = 'visible'
+        const coinsNeededSpan = document.querySelector('.coinsNeeded');
+        const shortCoins = 50 - currentCoins
+        coinsNeededSpan.textContent = shortCoins.toString();
+        setTimeout(() => {
+            notEnough.style.visibility = 'hidden'
+        }, 3000)
     }
-
 }
 
 function skinSonic() {
     const coinsSpan = document.querySelector('.coins');
     const currentCoins = parseInt(coinsSpan.textContent);
-    const newCoins = currentCoins - 1;
-    if (currentCoins >= 1) {
+    const newCoins = currentCoins - 80;
+    if (currentCoins >= 80) {
         mario.src = 'assets/images/sonic.webp';
         mario.style.width = '180px'
         mario.style.bottom = '0px'
@@ -132,15 +149,22 @@ function skinSonic() {
         pipe.src = 'assets/images/sonicpipe.png';
         pipe.style.width = '130px';
         pipe.style.marginBottom = '-30px'
+    } else {
+        const notEnough = document.querySelector('.notEnough')
+        notEnough.style.visibility = 'visible'
+        const coinsNeededSpan = document.querySelector('.coinsNeeded');
+        const shortCoins = 80 - currentCoins
+        coinsNeededSpan.textContent = shortCoins.toString();
+        setTimeout(() => {
+            notEnough.style.visibility = 'hidden'
+        }, 3000)
     }
-
 }
 
 function skinHomer() {
     const coinsSpan = document.querySelector('.coins');
     const currentCoins = parseInt(coinsSpan.textContent);
-    const newCoins = currentCoins - 1;
-    if (currentCoins >= 1) {
+    if (currentCoins >= 150) {
         mario.src = 'assets/images/homer.gif';
         mario.style.width = '180px'
         mario.style.bottom = '0px'
@@ -148,8 +172,16 @@ function skinHomer() {
         skin = 'homer';
         pipe.src = 'assets/images/homerpipe.webp';
         pipe.style.width = '130px'
+    }else {
+        const notEnough = document.querySelector('.notEnough')
+        notEnough.style.visibility = 'visible'
+        const coinsNeededSpan = document.querySelector('.coinsNeeded');
+        const shortCoins = 150 - currentCoins
+        coinsNeededSpan.textContent = shortCoins.toString();
+        setTimeout(() => {
+            notEnough.style.visibility = 'hidden'
+        }, 3000)
     }
-
 }
 
 document.addEventListener('keydown', jump);

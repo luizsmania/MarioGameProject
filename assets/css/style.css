@@ -23,8 +23,8 @@
 
 .clouds {
     position: absolute;
-    width: 600px;
-    animation: clouds 15s infinite linear
+    width: 700px;
+    animation: clouds 18s infinite linear
 }
 
 .mario {
@@ -42,7 +42,7 @@
     position: absolute;
     width: 450px;
     right: 40vw;
-    bottom: 120px;
+    bottom: 160px;
     visibility: hidden;
     clear: both;
 }
@@ -68,8 +68,21 @@
     border-radius: 50px;
 }
 
-.buySkin span:hover{
-    margin-left: 10px;
+.speedCount {
+    font-size: 80px;
+    position: absolute;
+    margin-left: 40%;
+    margin-top: 120px;
+    visibility: hidden;
+}
+
+.speed {
+    color: green;
+}
+
+.notEnough {
+    color: red;
+    visibility: hidden;
 }
 
 
