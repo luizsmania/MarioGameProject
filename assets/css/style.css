@@ -40,7 +40,8 @@ img {
     bottom: 0;
     width: 100px;
     animation: pipe-animation 1.5s infinite linear;
-    right: -500px;
+    /* right: -500px; */
+    visibility: hidden;
 }
 
 .clouds {

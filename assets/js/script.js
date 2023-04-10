@@ -42,6 +42,7 @@ function startGame() {
     pipe.style.animation = '';
     clouds.style.animation = '';
     pipe.style.left = '';
+    pipe.style.right = '';
     mario.style.bottom = '';
     skin = 'mario';
     pipe.src = 'assets/images/pipe.png';
@@ -60,6 +61,29 @@ function startGame() {
         coinsSpan.textContent = newCoins.toString();
     }, 500);
 
+    const pipeAnimationInterval = setInterval(() => {
+        const pipe = document.querySelector('.pipe');
+        const pipeAnimationTime = parseFloat(getComputedStyle(pipe).animationDuration.replace('s', ''));
+        const speedSpan = document.querySelector('.speed');
+        const speedCounter = document.querySelector('.speedCount')
+      
+        console.log('Pipe computed style:', getComputedStyle(pipe));
+      
+        if (pipeAnimationTime > 0.7) {
+          pipe.style.visibility = 'hidden';
+          speedSpan.textContent = parseInt(speedSpan.textContent) + 1;
+          speedCounter.style.visibility = 'visible';
+          pipe.style.right = '-500px'
+          setTimeout(() => {
+            pipe.style.right = '';
+            speedCounter.style.visibility = 'hidden';
+            pipe.style.visibility = 'hidden';
+            pipe.style.animation = `pipe-animation ${pipeAnimationTime - 0.1}s infinite linear`;
+            pipe.style.right = '-500px'; // Add this line to set the pipe's initial position
+          }, 500);
+        }
+      }, 12000);
+
     setTimeout(() => {
     let loop = setInterval(() => {
         const pipePosition = pipe.offsetLeft;
@@ -70,12 +94,13 @@ function startGame() {
         pipe.style.visibility = 'visible'
         // pipe.style.right = '-500px'
 
+        
+
         if (pipePosition <= 210 && pipePosition > 20 && marioPosition < 100 && !isGameOver) {
             isGameOver = true;
             if(isGameOver){
             pipe.style.animation = 'none';
             pipe.style.left = `${pipePosition}px`;
-
             mario.style.animation = 'none';
             mario.style.bottom = `${marioPosition}px`;
 
@@ -83,7 +108,6 @@ function startGame() {
                 mario.src = 'assets/images/gameover.png'
                 mario.style.width = '75px';
                 mario.style.bottom = `${marioPosition}px`;
-                pipe.style.left = `${pipePosition}px`;
             } else if (skin === 'pikachu') {
                 mario.src = 'assets/images/pikaover.png'
                 mario.style.width = '130px';
@@ -102,6 +126,19 @@ function startGame() {
             gameOver.style.visibility = 'visible';
             tryAgain.style.visibility = 'visible';
 
+            const scoreSpan = document.querySelector('.score');
+            const currentScore = parseInt(scoreSpan.textContent);
+            const bestScore = currentScore;
+            const bestScoreSpan = document.querySelector('.bestScore');
+            if (bestScoreSpan.textContent < currentScore){
+                bestScoreSpan.textContent = bestScore.toString();
+            }
+            
+            scoreSpan.textContent = '0';
+            const coinsSpan = document.querySelector('.coins');
+            coinsSpan.textContent = '0';
+            const speedSpan = document.querySelector('.speed');
+            speedSpan.textContent = '0';
             clearInterval(loop);
             clearInterval(scoreLoop);
             clearInterval(coinsLoop);
@@ -109,26 +146,7 @@ function startGame() {
         }}
     }, 100);}, 5000);} // 5 seconds delay before starting the loop
 
-    const pipeAnimationInterval = setInterval(() => {
-    const pipeAnimationTime = parseFloat(getComputedStyle(pipe).animationDuration.replace('s', ''));
-    const speedSpan = document.querySelector('.speed');
-    const speedCounter = document.querySelector('.speedCount')
-
-    console.log('Pipe computed style:', getComputedStyle(pipe));
-
-    if (pipeAnimationTime > 0.8) {
-        pipe.style.animationDuration = `${pipeAnimationTime - 0.1}s`;
-        speedSpan.textContent = parseInt(speedSpan.textContent) + 1;
-        pipe.style.visibility = 'hidden';
-        speedCounter.style.visibility = 'visible';
-        pipe.style.animation = 'none';
-        setTimeout(() => {
-            pipe.style.visibility = 'visible'
-            speedCounter.style.visibility = 'hidden';
-            pipe.style.animation = `pipe-animation ${pipeAnimationTime - 0.1}s infinite linear`;
-        }, 700);
-    }
-}, 12000);
+    
 
 
 function restart() {
