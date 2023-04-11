@@ -15,7 +15,7 @@ img {
   }
 
 .gameitself {
-    visibility: hidden;
+    visibility: visible;
     margin-top: 0;
 }
 
@@ -39,7 +39,7 @@ img {
     position: absolute;
     bottom: 0;
     width: 100px;
-    animation: pipe-animation 1.5s infinite linear;
+    /* animation: pipe-animation 1.5s infinite linear; */
     /* right: -500px; */
     visibility: hidden;
 }
@@ -107,6 +107,12 @@ img {
 .notEnough {
     color: red;
     visibility: hidden;
+}
+
+.playbtn {
+    position: absolute;
+    bottom: 150px;
+    right: 40%;
 }
 
 

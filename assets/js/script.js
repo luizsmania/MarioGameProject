@@ -7,10 +7,13 @@ const gameItself = document.querySelector('.gameitself')
 const startGameButton = document.querySelector('.startButton')
 let skin = 'mario'
 
+// document.addEventListener('click', startGame())
+
 
 
 
 function startGame() {
+    const playBtn = document.querySelector('.playbtn')
     const gameOver = document.querySelector('.gameover');
     const tryAgain = document.querySelector('.tryagain');
     let isGameOver = false;
@@ -29,10 +32,10 @@ function startGame() {
 
     document.addEventListener('keydown', jump);
     gameBoard.addEventListener('mousedown', jump);
-    pipe.style.animation = 'pipe-animation 1.5s infinite linear';
+    
     gameItself.style.visibility = 'visible';
+    playBtn.style.visibility = 'hidden'
     startGameButton.style.visibility = 'hidden';
-
     pipe.style.visibility = 'hidden';
     gameOver.style.visibility = 'hidden';
     tryAgain.style.visibility = 'hidden';
@@ -46,6 +49,7 @@ function startGame() {
     mario.style.bottom = '';
     skin = 'mario';
     pipe.src = 'assets/images/pipe.png';
+    pipe.style.animation = 'pipe-animation 1.5s infinite linear';
 
     let scoreLoop = setInterval(() => {
         const scoreSpan = document.querySelector('.score');
@@ -70,16 +74,19 @@ function startGame() {
         console.log('Pipe computed style:', getComputedStyle(pipe));
       
         if (pipeAnimationTime > 0.7) {
-          pipe.style.visibility = 'hidden';
           speedSpan.textContent = parseInt(speedSpan.textContent) + 1;
           speedCounter.style.visibility = 'visible';
-          pipe.style.right = '-500px'
+          pipe.style.visibility = 'hidden';
+          pipe.style.right = '-500px';
+          pipe.style.animation = 'none';
+          
           setTimeout(() => {
             pipe.style.right = '';
-            speedCounter.style.visibility = 'hidden';
-            pipe.style.visibility = 'hidden';
+            pipe.style.visibility = 'visible';
             pipe.style.animation = `pipe-animation ${pipeAnimationTime - 0.1}s infinite linear`;
-            pipe.style.right = '-500px'; // Add this line to set the pipe's initial position
+            speedCounter.style.visibility = 'hidden';
+            
+            
           }, 500);
         }
       }, 12000);
@@ -92,7 +99,6 @@ function startGame() {
         
 
         pipe.style.visibility = 'visible'
-        // pipe.style.right = '-500px'
 
         
 
@@ -144,7 +150,7 @@ function startGame() {
             clearInterval(coinsLoop);
             clearInterval(pipeAnimationInterval);
         }}
-    }, 100);}, 5000);} // 5 seconds delay before starting the loop
+    }, 100);}, 1);} // 5 seconds delay before starting the loop
 
     
 
