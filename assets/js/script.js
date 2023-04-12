@@ -106,7 +106,7 @@ function startGame() {
 
         
 
-        if (pipePosition <= 210 && pipePosition > 20 && marioPosition < 100 && !isGameOver) {
+        if (pipePosition <= 180 && pipePosition > 10 && marioPosition < 100 && !isGameOver) {
             isGameOver = true;
             if(isGameOver){
             pipe.style.animation = 'none';
