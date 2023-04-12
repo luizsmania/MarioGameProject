@@ -4,6 +4,24 @@
     box-sizing: border-box;
 }
 
+.rules {
+    text-align: center;
+    margin: 50px;
+    font-size: large;
+}
+
+.shop {
+    text-align: center;
+}
+
+.shop p {
+    margin-bottom: 10px;
+}
+
+.rules p {
+    margin-top: 10px;
+}
+
 nav {
     text-align: center;
 }

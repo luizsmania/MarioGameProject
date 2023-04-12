@@ -33,6 +33,7 @@ function startGame() {
     document.addEventListener('keydown', jump);
     gameBoard.addEventListener('mousedown', jump);
     
+    gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
     gameItself.style.visibility = 'visible';
     playBtn.style.visibility = 'hidden'
     startGameButton.style.visibility = 'hidden';
@@ -40,6 +41,7 @@ function startGame() {
     gameOver.style.visibility = 'hidden';
     tryAgain.style.visibility = 'hidden';
     mario.src = 'assets/images/mario.webp'
+    clouds.src = 'assets/images/clouds.png'
     mario.style.animation = '';
     mario.style.width = '150px';
     pipe.style.animation = '';
@@ -49,6 +51,8 @@ function startGame() {
     mario.style.bottom = '';
     skin = 'mario';
     pipe.src = 'assets/images/pipe.png';
+    pipe.style.width = '170px';
+    pipe.style.marginBottom = '0px';
     pipe.style.animation = 'pipe-animation 1.5s infinite linear';
 
     let scoreLoop = setInterval(() => {
@@ -61,9 +65,9 @@ function startGame() {
     let coinsLoop = setInterval(() => {
         const coinsSpan = document.querySelector('.coins');
         const currentCoins = parseInt(coinsSpan.textContent);
-        const newCoins = currentCoins + 5;
+        const newCoins = currentCoins + 2;
         coinsSpan.textContent = newCoins.toString();
-    }, 500);
+    }, 800);
 
     const pipeAnimationInterval = setInterval(() => {
         const pipe = document.querySelector('.pipe');
@@ -86,8 +90,8 @@ function startGame() {
             pipe.style.animation = `pipe-animation ${pipeAnimationTime - 0.1}s infinite linear`;
             speedCounter.style.visibility = 'hidden';
             
-            
-          }, 500);
+          }, 2000);
+    
         }
       }, 12000);
 
@@ -122,7 +126,10 @@ function startGame() {
             } else if (skin === 'sonic') {
                 mario.src = 'assets/images/sonicover.png';
             } else if (skin === 'homer') {
-                mario.src = 'assets/images/homerover.png'
+                mario.src = 'assets/images/homerover.png';
+            } else if (skin === 'mistery') {
+                mario.src = 'assets/images/misteryover.png';
+
             }
 
             clouds.style.animation = 'none';
@@ -141,16 +148,15 @@ function startGame() {
             }
             
             scoreSpan.textContent = '0';
-            const coinsSpan = document.querySelector('.coins');
-            coinsSpan.textContent = '0';
             const speedSpan = document.querySelector('.speed');
-            speedSpan.textContent = '0';
+            speedSpan.textContent = '1';
             clearInterval(loop);
             clearInterval(scoreLoop);
             clearInterval(coinsLoop);
+            clearInterval(increaseCoinsLoop);
             clearInterval(pipeAnimationInterval);
         }}
-    }, 100);}, 1);} // 5 seconds delay before starting the loop
+    }, 100);}, 1);}
 
     
 
@@ -159,11 +165,30 @@ function restart() {
     location.reload();
 }
 
-document.addEventListener('keydown', jump);
-gameBoard.addEventListener('mousedown', jump);
-
-
-
+function skinMario() {
+    const coinsSpan = document.querySelector('.coins');
+    const currentCoins = parseInt(coinsSpan.textContent);
+    const newCoins = currentCoins - 0;
+    if (currentCoins >= 0) {
+        mario.src = 'assets/images/mario.webp';
+        mario.style.width = '150px'
+        mario.style.bottom = '-15px'
+        coinsSpan.textContent = newCoins.toString();
+        skin = 'mario';
+        pipe.src = 'assets/images/pipe.png';
+        pipe.style.width = '180px'
+        pipe.style.marginBottom = '';
+    } else {
+        const notEnough = document.querySelector('.notEnough')
+        notEnough.style.visibility = 'visible'
+        const coinsNeededSpan = document.querySelector('.coinsNeeded');
+        const shortCoins = 150 - currentCoins
+        coinsNeededSpan.textContent = shortCoins.toString();
+        setTimeout(() => {
+            notEnough.style.visibility = 'hidden'
+        }, 3000)
+    }
+}
 
 function skinSonic() {
     const coinsSpan = document.querySelector('.coins');
@@ -193,6 +218,7 @@ function skinSonic() {
 function skinHomer() {
     const coinsSpan = document.querySelector('.coins');
     const currentCoins = parseInt(coinsSpan.textContent);
+    const newCoins = currentCoins - 150;
     if (currentCoins >= 150) {
         mario.src = 'assets/images/homer.gif';
         mario.style.width = '180px'
@@ -201,6 +227,7 @@ function skinHomer() {
         skin = 'homer';
         pipe.src = 'assets/images/homerpipe.webp';
         pipe.style.width = '130px'
+        pipe.style.marginBottom = '-7px'
     } else {
         const notEnough = document.querySelector('.notEnough')
         notEnough.style.visibility = 'visible'
@@ -223,7 +250,7 @@ function skinPika() {
         mario.style.bottom = '0px'
         coinsSpan.textContent = newCoins.toString();
         skin = 'pikachu';
-        pipe.src = 'assets/images/pikachupipe.png'
+        pipe.src = 'assets/images/pikachupipe.png';
         pipe.style.width = '230px';
         pipe.style.marginBottom = '-35px'
 
@@ -232,6 +259,34 @@ function skinPika() {
         notEnough.style.visibility = 'visible'
         const coinsNeededSpan = document.querySelector('.coinsNeeded');
         const shortCoins = 50 - currentCoins
+        coinsNeededSpan.textContent = shortCoins.toString();
+        setTimeout(() => {
+            notEnough.style.visibility = 'hidden'
+        }, 3000)
+    }
+}
+
+function skinMistery() {
+    const coinsSpan = document.querySelector('.coins');
+    const currentCoins = parseInt(coinsSpan.textContent);
+    const newCoins = currentCoins - 999;
+    if (currentCoins >= 999) {
+        mario.src = 'assets/images/mistery.gif';
+        gameBoard.style.backgroundImage = 'url(assets/images/misterybg.png)'
+        mario.style.width = '180px'
+        mario.style.bottom = '0px'
+        coinsSpan.textContent = newCoins.toString();
+        skin = 'mistery';
+        pipe.src = 'assets/images/misterypipe.png';
+        clouds.src = 'assets/images/misterycloud.png';
+        pipe.style.width = '100px';
+        pipe.style.marginBottom = '-35px'
+
+    } else {
+        const notEnough = document.querySelector('.notEnough')
+        notEnough.style.visibility = 'visible'
+        const coinsNeededSpan = document.querySelector('.coinsNeeded');
+        const shortCoins = 999 - currentCoins
         coinsNeededSpan.textContent = shortCoins.toString();
         setTimeout(() => {
             notEnough.style.visibility = 'hidden'
