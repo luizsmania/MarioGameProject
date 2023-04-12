@@ -33,15 +33,12 @@ function startGame() {
     document.addEventListener('keydown', jump);
     gameBoard.addEventListener('mousedown', jump);
     
-    gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
     gameItself.style.visibility = 'visible';
     playBtn.style.visibility = 'hidden'
     startGameButton.style.visibility = 'hidden';
     pipe.style.visibility = 'hidden';
     gameOver.style.visibility = 'hidden';
     tryAgain.style.visibility = 'hidden';
-    mario.src = 'assets/images/mario.webp'
-    clouds.src = 'assets/images/clouds.png'
     mario.style.animation = '';
     mario.style.width = '150px';
     pipe.style.animation = '';
@@ -49,10 +46,54 @@ function startGame() {
     pipe.style.left = '';
     pipe.style.right = '';
     mario.style.bottom = '';
-    skin = 'mario';
-    pipe.src = 'assets/images/pipe.png';
-    pipe.style.width = '170px';
-    pipe.style.marginBottom = '0px';
+    if (skin === 'mario'){
+        mario.src = 'assets/images/mario.webp';
+        clouds.src = 'assets/images/clouds.png';
+        gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
+        mario.style.width = '150px'
+        mario.style.bottom = '0px'
+        pipe.src = 'assets/images/pipe.png';
+        pipe.style.width = '170px';
+        mario.style.bottom = '-15px'
+    }else if(skin === 'pikachu'){
+        mario.src = 'assets/images/pikachu.webp';
+        clouds.src = 'assets/images/clouds.png';
+        gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
+        mario.style.width = '180px'
+        mario.style.bottom = '0px'
+        pipe.src = 'assets/images/pikachupipe.png';
+        pipe.style.width = '230px';
+        pipe.style.marginBottom = '-35px'
+    }else if (skin === 'sonic'){
+        mario.src = 'assets/images/sonic.webp';
+        clouds.src = 'assets/images/clouds.png';
+        gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
+        mario.style.width = '150px'
+        mario.style.bottom = '0px'
+        pipe.src = 'assets/images/sonicpipe.png';
+        pipe.style.width = '130px';
+        pipe.style.marginBottom = '-30px'
+    }else if (skin === 'homer'){
+        mario.src = 'assets/images/homer.gif';
+        clouds.src = 'assets/images/clouds.png';
+        gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
+        mario.style.width = '180px'
+        mario.style.bottom = '0px'
+        skin = 'homer';
+        pipe.src = 'assets/images/homerpipe.webp';
+        pipe.style.width = '130px'
+        pipe.style.marginBottom = '-7px'
+    }else if (skin === 'mistery'){
+        mario.src = 'assets/images/mistery.gif';
+        clouds.src = 'assets/images/misterycloud.png';
+        gameBoard.style.backgroundImage = 'url(assets/images/misterybg.png)'
+        mario.style.width = '180px'
+        mario.style.bottom = '0px'
+        pipe.src = 'assets/images/misterypipe.png';
+        clouds.src = 'assets/images/misterycloud.png';
+        pipe.style.width = '100px';
+        pipe.style.marginBottom = '-35px'
+    }
     pipe.style.animation = 'pipe-animation 1.5s infinite linear';
 
     let scoreLoop = setInterval(() => {
@@ -69,31 +110,31 @@ function startGame() {
         coinsSpan.textContent = newCoins.toString();
     }, 800);
 
-    const pipeAnimationInterval = setInterval(() => {
-        const pipe = document.querySelector('.pipe');
-        const pipeAnimationTime = parseFloat(getComputedStyle(pipe).animationDuration.replace('s', ''));
-        const speedSpan = document.querySelector('.speed');
-        const speedCounter = document.querySelector('.speedCount')
+    // const pipeAnimationInterval = setInterval(() => {
+    //     const pipe = document.querySelector('.pipe');
+    //     const pipeAnimationTime = parseFloat(getComputedStyle(pipe).animationDuration.replace('s', ''));
+    //     const speedSpan = document.querySelector('.speed');
+    //     const speedCounter = document.querySelector('.speedCount')
       
-        console.log('Pipe computed style:', getComputedStyle(pipe));
+    //     console.log('Pipe computed style:', getComputedStyle(pipe));
       
-        if (pipeAnimationTime > 0.7) {
-          speedSpan.textContent = parseInt(speedSpan.textContent) + 1;
-          speedCounter.style.visibility = 'visible';
-          pipe.style.visibility = 'hidden';
-          pipe.style.right = '-500px';
-          pipe.style.animation = 'none';
+    //     if (pipeAnimationTime > 0.7) {
+    //       speedSpan.textContent = parseInt(speedSpan.textContent) + 1;
+    //       speedCounter.style.visibility = 'visible';
+    //       pipe.style.visibility = 'hidden';
+    //       pipe.style.right = '-500px';
+    //       pipe.style.animation = 'none';
           
-          setTimeout(() => {
-            pipe.style.right = '';
-            pipe.style.visibility = 'visible';
-            pipe.style.animation = `pipe-animation ${pipeAnimationTime - 0.1}s infinite linear`;
-            speedCounter.style.visibility = 'hidden';
+    //       setTimeout(() => {
+    //         pipe.style.right = '';
+    //         pipe.style.visibility = 'visible';
+    //         pipe.style.animation = `pipe-animation ${pipeAnimationTime - 0.1}s infinite linear`;
+    //         speedCounter.style.visibility = 'hidden';
             
-          }, 2000);
+    //       }, 2000);
     
-        }
-      }, 12000);
+    //     }
+    //   }, 12000);
 
     setTimeout(() => {
     let loop = setInterval(() => {
@@ -106,7 +147,7 @@ function startGame() {
 
         
 
-        if (pipePosition <= 180 && pipePosition > 10 && marioPosition < 100 && !isGameOver) {
+        if (pipePosition < 120 && pipePosition > 0 && marioPosition < 80 && !isGameOver) {
             isGameOver = true;
             if(isGameOver){
             pipe.style.animation = 'none';
@@ -121,7 +162,6 @@ function startGame() {
             } else if (skin === 'pikachu') {
                 mario.src = 'assets/images/pikaover.png'
                 mario.style.width = '130px';
-                mario.style.marginLeft = '50px';
                 mario.style.bottom = `${marioPosition}px`;
             } else if (skin === 'sonic') {
                 mario.src = 'assets/images/sonicover.png';
@@ -171,9 +211,11 @@ function skinMario() {
     const newCoins = currentCoins - 0;
     if (currentCoins >= 0) {
         mario.src = 'assets/images/mario.webp';
+        clouds.src = 'assets/images/clouds.png';
         mario.style.width = '150px'
         mario.style.bottom = '-15px'
         coinsSpan.textContent = newCoins.toString();
+        gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
         skin = 'mario';
         pipe.src = 'assets/images/pipe.png';
         pipe.style.width = '180px'
@@ -193,10 +235,12 @@ function skinMario() {
 function skinSonic() {
     const coinsSpan = document.querySelector('.coins');
     const currentCoins = parseInt(coinsSpan.textContent);
-    const newCoins = currentCoins - 80;
-    if (currentCoins >= 80) {
+    const newCoins = currentCoins - 1;
+    if (currentCoins >= 1) {
         mario.src = 'assets/images/sonic.webp';
-        mario.style.width = '180px'
+        clouds.src = 'assets/images/clouds.png';
+        gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
+        mario.style.width = '150px'
         mario.style.bottom = '0px'
         coinsSpan.textContent = newCoins.toString();
         skin = 'sonic';
@@ -218,9 +262,11 @@ function skinSonic() {
 function skinHomer() {
     const coinsSpan = document.querySelector('.coins');
     const currentCoins = parseInt(coinsSpan.textContent);
-    const newCoins = currentCoins - 150;
-    if (currentCoins >= 150) {
+    const newCoins = currentCoins - 1;
+    if (currentCoins >= 1) {
         mario.src = 'assets/images/homer.gif';
+        clouds.src = 'assets/images/clouds.png';
+        gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
         mario.style.width = '180px'
         mario.style.bottom = '0px'
         coinsSpan.textContent = newCoins.toString();
@@ -243,9 +289,11 @@ function skinHomer() {
 function skinPika() {
     const coinsSpan = document.querySelector('.coins');
     const currentCoins = parseInt(coinsSpan.textContent);
-    const newCoins = currentCoins - 50;
-    if (currentCoins >= 50) {
+    const newCoins = currentCoins - 1;
+    if (currentCoins >= 1) {
         mario.src = 'assets/images/pikachu.webp';
+        clouds.src = 'assets/images/clouds.png';
+        gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
         mario.style.width = '180px'
         mario.style.bottom = '0px'
         coinsSpan.textContent = newCoins.toString();
@@ -269,8 +317,8 @@ function skinPika() {
 function skinMistery() {
     const coinsSpan = document.querySelector('.coins');
     const currentCoins = parseInt(coinsSpan.textContent);
-    const newCoins = currentCoins - 999;
-    if (currentCoins >= 999) {
+    const newCoins = currentCoins - 1;
+    if (currentCoins >= 1) {
         mario.src = 'assets/images/mistery.gif';
         gameBoard.style.backgroundImage = 'url(assets/images/misterybg.png)'
         mario.style.width = '180px'
