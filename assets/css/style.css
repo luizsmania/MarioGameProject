@@ -149,10 +149,10 @@ img {
 }
 
 .playbtn { 
-    position: relative;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    position: absolute;
+    top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
     }
 
 
@@ -231,7 +231,7 @@ img {
     }
 
     .mario {
-        width: 50px;
+        width: 70px;
     }
     .rules {
         font-size: 16px;
@@ -244,5 +244,21 @@ img {
         border-bottom: 5px solid rgb(35, 160, 35);
     
     }
-
-}
+    @keyframes jump {
+        0% {
+          bottom: -15px;
+        }
+        40% {
+          bottom: 110px;
+        }
+        50% {
+          bottom: 110px;
+        }
+        60% {
+          bottom: 110px;
+        }
+        100% {
+          bottom: -15px;
+        }
+      }
+    }
