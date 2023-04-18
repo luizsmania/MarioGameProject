@@ -39,7 +39,7 @@ function startGame() {
         mario.src = 'assets/images/mario.webp';
         clouds.src = 'assets/images/clouds.png';
         gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             mario.style.width = '90px'
           } else {
             mario.style.width = '150px'
@@ -47,7 +47,7 @@ function startGame() {
 
         mario.style.bottom = '0px'
         pipe.src = 'assets/images/pipe.png';
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             pipe.style.width = '100px'
           } else {
             pipe.style.width = '170px'
@@ -57,14 +57,14 @@ function startGame() {
         mario.src = 'assets/images/pikachu.webp';
         clouds.src = 'assets/images/clouds.png';
         gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             mario.style.width = '90px'
           } else {
             mario.style.width = '180px'
           };
         mario.style.bottom = '0px'
         pipe.src = 'assets/images/pikachupipe.png';
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             pipe.style.width = '140px';
             pipe.style.marginBottom = '-19px'
           } else {
@@ -75,14 +75,14 @@ function startGame() {
         mario.src = 'assets/images/sonic.webp';
         clouds.src = 'assets/images/clouds.png';
         gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             mario.style.width = '80px';
           } else {
             mario.style.width = '150px'
           };
         mario.style.bottom = '0px'
         pipe.src = 'assets/images/sonicpipe.png';
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             pipe.style.width = '75px'
           } else {
             pipe.style.width = '130px';
@@ -92,7 +92,7 @@ function startGame() {
         mario.src = 'assets/images/homer.gif';
         clouds.src = 'assets/images/clouds.png';
         gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             mario.style.width = '100px'
           } else {
             mario.style.width = '150px'
@@ -100,7 +100,7 @@ function startGame() {
         mario.style.bottom = '0px'
         skin = 'homer';
         pipe.src = 'assets/images/homerpipe.webp';
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             pipe.style.width = '80px'
           } else {
             pipe.style.width = '130px';
@@ -110,7 +110,7 @@ function startGame() {
         mario.src = 'assets/images/mistery.gif';
         clouds.src = 'assets/images/misterycloud.png';
         gameBoard.style.backgroundImage = 'url(assets/images/misterybg.png)'
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             mario.style.width = '100px'
             mario.style.marginBottom = '-5px';
           } else {
@@ -120,7 +120,7 @@ function startGame() {
         mario.style.bottom = '0px'
         pipe.src = 'assets/images/misterypipe.png';
         clouds.src = 'assets/images/misterycloud.png';
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             pipe.style.width = '60px'
           } else {
             pipe.style.width = '90px';
@@ -139,7 +139,7 @@ function startGame() {
     let coinsLoop = setInterval(() => {
         const coinsSpan = document.querySelector('.coins');
         const currentCoins = parseInt(coinsSpan.textContent);
-        const newCoins = currentCoins + 200;
+        const newCoins = currentCoins + 3;
         coinsSpan.textContent = newCoins.toString();
     }, 800);
 
@@ -161,9 +161,11 @@ function startGame() {
                     mario.src = 'assets/images/gameover.png'
                     mario.style.width = '75px';
                     mario.style.bottom = `${marioPosition}px`;
+                    mario.style.marginLeft = '50px';
+                    mario.style.marginBottom = '0px'
                 } else if (skin === 'pikachu') {
                     mario.src = 'assets/images/pikaover.png'
-                    mario.style.width = '130px';
+                    mario.style.width = '150px';
                     mario.style.marginLeft = '50px';
                     mario.style.bottom = `${marioPosition}px`;
                 } else if (skin === 'sonic') {
@@ -198,12 +200,12 @@ function startGame() {
                 clouds.style.right = `${cloudPosition}px`;
                 if (skin === 'mario') {
                     mario.src = 'assets/images/gameover.png'
-                    mario.style.width = '75px';
-                    mario.style.bottom = `${marioPosition}px`;
+                    mario.style.width = '45px';
+                    mario.style.bottom = `${marioPosition + 10}px`;
                 } else if (skin === 'pikachu') {
                     mario.src = 'assets/images/pikaover.png'
-                    mario.style.width = '130px';
-                    mario.style.marginLeft = '50px';
+                    mario.style.width = '75px';
+                    mario.style.marginLeft = '10px';
                     mario.style.bottom = `${marioPosition}px`;
                 } else if (skin === 'sonic') {
                     mario.src = 'assets/images/sonicover.png';
@@ -242,17 +244,20 @@ function skinMario() {
     if (currentCoins >= 0) {
         mario.src = 'assets/images/mario.webp';
         clouds.src = 'assets/images/clouds.png';
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             mario.style.width = '100px'
+            mario.style.marginBottom = '-5px';
           } else {
             mario.style.width = '150px'
+            mario.style.marginBottom = '-10px';
           };
         coinsSpan.textContent = newCoins.toString();
         gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
         skin = 'mario';
         pipe.src = 'assets/images/pipe.png';
         pipe.style.marginBottom = '0px'
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        
+        if (window.matchMedia("(max-width: 850px)").matches) {
             pipe.style.width = '100px'
           } else {
             pipe.style.width = '180px'
@@ -261,7 +266,7 @@ function skinMario() {
         const notEnough = document.querySelector('.notEnough')
         notEnough.style.visibility = 'visible'
         const coinsNeededSpan = document.querySelector('.coinsNeeded');
-        const shortCoins = 150 - currentCoins
+        const shortCoins = 0 - currentCoins
         coinsNeededSpan.textContent = shortCoins.toString();
         setTimeout(() => {
             notEnough.style.visibility = 'hidden'
@@ -272,12 +277,12 @@ function skinMario() {
 function skinSonic() {
     const coinsSpan = document.querySelector('.coins');
     const currentCoins = parseInt(coinsSpan.textContent);
-    const newCoins = currentCoins - 1;
-    if (currentCoins >= 1) {
+    const newCoins = currentCoins - 80;
+    if (currentCoins >= 80) {
         mario.src = 'assets/images/sonic.webp';
         clouds.src = 'assets/images/clouds.png';
         gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             mario.style.width = '80px';
           } else {
             mario.style.width = '150px'
@@ -286,7 +291,7 @@ function skinSonic() {
         coinsSpan.textContent = newCoins.toString();
         skin = 'sonic';
         pipe.src = 'assets/images/sonicpipe.png';
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             pipe.style.width = '75px'
           } else {
             pipe.style.width = '130px';
@@ -307,12 +312,12 @@ function skinSonic() {
 function skinHomer() {
     const coinsSpan = document.querySelector('.coins');
     const currentCoins = parseInt(coinsSpan.textContent);
-    const newCoins = currentCoins - 1;
-    if (currentCoins >= 1) {
+    const newCoins = currentCoins - 150;
+    if (currentCoins >= 150) {
         mario.src = 'assets/images/homer.gif';
         clouds.src = 'assets/images/clouds.png';
         gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             mario.style.width = '100px'
           } else {
             mario.style.width = '150px'
@@ -321,7 +326,7 @@ function skinHomer() {
         coinsSpan.textContent = newCoins.toString();
         skin = 'homer';
         pipe.src = 'assets/images/homerpipe.webp';
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             pipe.style.width = '80px'
           } else {
             pipe.style.width = '130px';
@@ -342,12 +347,12 @@ function skinHomer() {
 function skinPika() {
     const coinsSpan = document.querySelector('.coins');
     const currentCoins = parseInt(coinsSpan.textContent);
-    const newCoins = currentCoins - 1;
-    if (currentCoins >= 1) {
+    const newCoins = currentCoins - 50;
+    if (currentCoins >= 50) {
         mario.src = 'assets/images/pikachu.webp';
         clouds.src = 'assets/images/clouds.png';
         gameBoard.style.backgroundImage = 'linear-gradient(#87CEEB, #E0F6FF)'
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             mario.style.width = '90px'
           } else {
             mario.style.width = '180px'
@@ -356,7 +361,8 @@ function skinPika() {
         coinsSpan.textContent = newCoins.toString();
         skin = 'pikachu';
         pipe.src = 'assets/images/pikachupipe.png';
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        mario.style.marginBottom = '0px';
+        if (window.matchMedia("(max-width: 850px)").matches) {
             pipe.style.width = '140px';
             pipe.style.marginBottom = '-19px'
           } else {
@@ -379,11 +385,12 @@ function skinPika() {
 function skinMistery() {
     const coinsSpan = document.querySelector('.coins');
     const currentCoins = parseInt(coinsSpan.textContent);
-    const newCoins = currentCoins - 1;
-    if (currentCoins >= 1) {
+    const newCoins = currentCoins - 999;
+    if (currentCoins >= 999) {
         mario.src = 'assets/images/mistery.gif';
-        gameBoard.style.backgroundImage = 'url(assets/images/misterybg.png)'
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        gameBoard.style.background = 'url(assets/images/misterybg.png) center center'
+        gameBoard.style.backgroundSize = 'contain'
+        if (window.matchMedia("(max-width: 850px)").matches) {
             mario.style.width = '100px'
             mario.style.marginBottom = '-5px';
           } else {
@@ -395,7 +402,7 @@ function skinMistery() {
         pipe.src = 'assets/images/misterypipe.png';
         pipe.style.marginBottom = '-10px'
         clouds.src = 'assets/images/misterycloud.png';
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 850px)").matches) {
             pipe.style.width = '60px'
           } else {
             pipe.style.width = '90px';
