@@ -19,7 +19,7 @@ function startGame() {
         }, 550);
     };
 
-    document.addEventListener('keydown', jump);
+    document.addEventListener('mousedown', jump);
     gameBoard.addEventListener('mousedown', jump);
     
 
